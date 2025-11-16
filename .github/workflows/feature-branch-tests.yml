@@ -1,4 +1,6 @@
 name: Feature Branch Tests
+permissions:
+  contents: read
 
 on:
   push:
