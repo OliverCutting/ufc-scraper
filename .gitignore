@@ -1,1 +1,8 @@
 .git
+.mvn/wrapper/dists/
+.vscode
+.vscode/*
+.idea
+target
+HELP.md
+.DS_STORE
