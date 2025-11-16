@@ -54,6 +54,71 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>3.3.1</version>
+					<executions>
+							<execution>
+									<id>checkstyle-validation</id>
+									<phase>verify</phase>
+									<goals>
+											<goal>check</goal>
+									</goals>
+							</execution>
+					</executions>
+					<configuration>
+							<configLocation>google_checks.xml</configLocation>
+							<failOnViolation>true</failOnViolation>
+					</configuration>
+			</plugin>
+
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-pmd-plugin</artifactId>
+			<version>3.22.0</version>
+			<executions>
+					<execution>
+							<id>pmd-validation</id>
+							<phase>verify</phase>
+							<goals>
+									<goal>check</goal>
+							</goals>
+					</execution>
+			</executions>
+			<configuration>
+					<failOnViolation>true</failOnViolation>
+					<printFailingErrors>true</printFailingErrors>
+			</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.9.8.1</version>
+				<executions>
+						<execution>
+								<id>spotbugs-validation</id>
+								<phase>verify</phase>
+								<goals>
+										<goal>check</goal>
+								</goals>
+						</execution>
+				</executions>
+				<configuration>
+						<effort>Max</effort>
+						<threshold>Low</threshold>
+						<failOnError>true</failOnError>
+				</configuration>
+			</plugin>
+
+			<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.11.0.3922</version>
+			</plugin>
+
 		</plugins>
 	</build>
 

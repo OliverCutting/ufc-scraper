@@ -1,32 +1,24 @@
-name: Feature Branch Tests
+name: Build & Analysis
 permissions:
   contents: read
 
-on:
-  push:
-    branches:
-      - 'feature/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '**'
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request' || startsWith(github.head_ref, 'feature/')
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Set up Temurin JDK 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
           java-version: '25'
-          cache: maven
+          distribution: 'temurin'
 
-      - name: Run unit tests
-        run: mvn -B test
+      - name: Build with Maven + Static Analysis
+        run: ./mvnw clean verify
+
+      - name: Semgrep Scan
+        uses: returntocorp/semgrep-action@v1
